@@ -1,0 +1,5 @@
+#!/bin/bash
+
+msg=${1:-"Updated"}
+
+git add --all && git commit -am "$msg" && git push origin main

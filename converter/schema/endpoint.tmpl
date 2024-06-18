@@ -1,0 +1,20 @@
+{
+  "endpoint": "%s",
+  "method": "%s",
+  %s%s
+  "output_encoding": "no-op",
+  "backend": [
+    {
+      "host": [ "{{ .env.backends.fastapi_url }}" ],
+      "url_pattern": "%s",
+      "method": "%s",
+      "extra_config": {
+        {{ template "qos-circuit-breaker.tmpl" }}
+      }
+    }
+  ],
+  "extra_config": {
+    {{ template "auth-validator.tmpl" .env }},
+    {{ template "qos-ratelimit-router.tmpl" dict "max_rate" "600" "every" "1m"}}
+  }
+}

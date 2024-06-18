@@ -1,0 +1,52 @@
+{
+  "$schema": "https://www.krakend.io/schema/v2.5/krakend.json",
+  "version": 3,
+  "name": "Utiligize API Gateway",
+  "port": 8080,
+  {{ include "tls.partial" }},
+  "timeout": "10s",
+  "extra_config": {
+    "router": {
+      "auto_options": true,
+      "health_path": "/health",
+      "hide_version_header": true,
+      "logger_skip_paths": [ "/health" ]
+    },
+    "security/bot-detector": {
+      "empty_user_agent_is_bot": true
+    },
+    "security/cors": {
+      "allow_credentials": true,
+      "allow_headers": [
+        "Accept-Language",
+        "Authorization",
+        "Cache-Control",
+        "Content-Type",
+        "Origin",
+        "Pragma",
+        "Tenant",
+        "X-Request-Id"
+      ],
+      "allow_methods": [
+        "DELETE",
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PATCH",
+        "POST",
+        "PUT"
+      ],
+      "allow_origins": {{ .env.security.cors.allow_origins }},
+      "debug": {{ .env.security.cors.debug }},
+      "max_age": "60s"
+    },
+    "security/http": {
+      "content_type_nosniff": true,
+      "is_development": {{ .env.security.http.is_development }}
+    },
+    {{ include "telemetry.partial" }}
+  },
+  "endpoints": [
+		%s
+	]
+}
