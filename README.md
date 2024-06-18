@@ -44,7 +44,7 @@
 To create KrakenD configurations from an OpenAPI specification:
 
 ```sh
-./oapi-krakend --spec="https://api.utiligize.com/openapi.json"
+./oapi-krakend --spec="https://petstore.swagger.io/v2/swagger.json"
 ```
 
 ### Using the `--includes` Option
@@ -52,7 +52,7 @@ To create KrakenD configurations from an OpenAPI specification:
 To include specific URI resources:
 
 ```sh
-./oapi-krakend --spec="https://api.utiligize.com/openapi.json" --includes="assets,tasks"
+./oapi-krakend --spec="https://petstore.swagger.io/v2/swagger.json" --includes="pet,store"
 ```
 
 ### Using the `--excludes` Option
@@ -60,14 +60,14 @@ To include specific URI resources:
 To exclude specific URI resources:
 
 ```sh
-./oapi-krakend --spec="https://api.utiligize.com/openapi.json" --excludes="der_types"
+./oapi-krakend --spec="https://petstore.swagger.io/v2/swagger.json" --excludes="store"
 ```
 
 
 ## Output
 
 ```plaintext
-cfg-krakend/
+.
 ├── templates/
 │   ├── endpoints-1.tmpl
 │   ├── endpoints-2.tmpl
