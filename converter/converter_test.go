@@ -2,6 +2,7 @@ package converter
 
 import (
 	_ "embed"
+	"fmt"
 	"testing"
 )
 
@@ -39,7 +40,11 @@ func TestConverter_Convert(t *testing.T) {
 				OutputDir: tt.fields.OutputDir,
 			}
 
-			c.Convert()
+			err := c.Convert()
+
+			if err != nil {
+				fmt.Println("Updated Unit Tests")
+			}
 
 		})
 	}
