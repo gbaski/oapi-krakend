@@ -1,6 +1,7 @@
 package converter
 
 import (
+	"bytes"
 	_ "embed"
 
 	"fmt"
@@ -207,21 +208,22 @@ func (c *Converter) update(bar *progressbar.ProgressBar) error {
 
 	}()
 
+	var buffer bytes.Buffer
 	var endpoint string
-	endpoints := []string{}
 
 	sort.Strings(c.templates)
 
 	for i, tmpl := range uniqueItems(c.templates) {
 
 		if i == 0 {
-			endpoint = fmt.Sprintf("{{ template \"%s\" . }}", tmpl)
+			endpoint = fmt.Sprintf("{{ template \"%s\" . }},\n", tmpl)
+
 		} else {
-			endpoint = fmt.Sprintf("\t\t{{ template \"%s\" . }}", tmpl)
+			endpoint = fmt.Sprintf("\t\t{{ template \"%s\" . }},\n", tmpl)
+
 		}
 
-		endpoints = append(endpoints, endpoint)
-
+		buffer.WriteString(endpoint)
 	}
 
 	krakend_tmpl := fmt.Sprintf("%s/krakend.tmpl", c.OutputDir)
@@ -246,7 +248,7 @@ func (c *Converter) update(bar *progressbar.ProgressBar) error {
 
 	}
 
-	krakendSchema = fmt.Sprintf(krakendSchema, strings.Join(endpoints, ",\n"))
+	krakendSchema = fmt.Sprintf(krakendSchema, buffer.String())
 
 	os.WriteFile(krakend_tmpl, []byte(krakendSchema), 0644)
 
