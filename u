@@ -3,3 +3,6 @@
 msg=${1:-"Updated"}
 
 git add --all && git commit -am "$msg" && git push origin main
+
+
+#git push origin v0.1.1 && GOPROXY=proxy.golang.org go list -m github.com/gbaski/oapi-krakend
