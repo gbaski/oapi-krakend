@@ -26,12 +26,11 @@ func main() {
 		return
 	}
 
-	c := converter.Converter{
-		Spec:      *spec,
+	c := converter.NewConverter(*spec, converter.Options{
 		Includes:  *includes,
 		Excludes:  *excludes,
 		OutputDir: *outputDir,
-	}
+	})
 
 	err := c.Convert()
 

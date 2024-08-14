@@ -25,13 +25,31 @@ var title string
 var tmpDir string
 
 type Converter struct {
-	count     int
 	Spec      string
-	Includes  string
-	Excludes  string
+	count     int
 	statItems StatItems
 	templates []string
+	Options
+}
+
+type Options struct {
+	Includes  string
+	Excludes  string
 	OutputDir string
+}
+
+func NewConverter(spec string, options ...Options) Converter {
+
+	converter := Converter{
+		Spec: spec,
+	}
+
+	if len(options) == 1 {
+		converter.Options = options[0]
+	}
+
+	return converter
+
 }
 
 func (c *Converter) generate(path string, method string, parameters map[string][]string) error {

@@ -5,4 +5,4 @@ msg=${1:-"Updated"}
 git add --all && git commit -am "$msg" && git push origin main
 
 
-#git tag v0.1.0 && git push origin v0.1.0 && GOPROXY=proxy.golang.org go list -m github.com/gbaski/oapi-krakend@v0.1.0
+#v=v0.2.4 && git tag $v  && git push origin $v && GOPROXY=proxy.golang.org go list -m github.com/gbaski/oapi-krakend@$v
