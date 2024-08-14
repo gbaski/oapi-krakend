@@ -1,10 +1,11 @@
 package main
 
 import (
-	"converter"
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/gbaski/oapi-krakend/converter"
 )
 
 func main() {
